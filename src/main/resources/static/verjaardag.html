@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gefeliciteerd!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 3rem 4rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 10;
+      max-width: 90vw;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .emoji-big {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea, #f093fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .sub {
+      font-size: 1.4rem;
+      color: #555;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* Balloons */
+    .balloon {
+      position: fixed;
+      bottom: -120px;
+      width: 60px;
+      height: 80px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      animation: floatUp linear infinite;
+      opacity: 0.85;
+      z-index: 1;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 30px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+      100% { transform: translateY(-110vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: confettiFall linear infinite;
+      z-index: 2;
+      border-radius: 2px;
+    }
+
+    @keyframes confettiFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 2rem 1.5rem; }
+      h1 { font-size: 2rem; }
+      .sub { font-size: 1.1rem; }
+      .emoji-big { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <span class="emoji-big">🎉🎈</span>
+    <h1>Iris & Jens</h1>
+    <h1 style="font-size:2rem;margin-top:0.25rem">4 juli 2026</h1>
+    <div class="sub">🎂 Van harte gefeliciteerd! 🎂</div>
+  </div>
+
+  <script>
+    // Balloon colors
+    const balloonColors = [
+      '#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3',
+      '#54a0ff', '#5f27cd', '#01a3a4', '#f368e0',
+      '#ff6348', '#7bed9f', '#70a1ff', '#ffa502'
+    ];
+
+    // Create balloons
+    for (let i = 0; i < 25; i++) {
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+      b.style.background = color;
+      b.style.left = Math.random() * 100 + '%';
+      b.style.width = (40 + Math.random() * 30) + 'px';
+      b.style.height = (60 + Math.random() * 40) + 'px';
+      b.style.animationDuration = (6 + Math.random() * 8) + 's';
+      b.style.animationDelay = (Math.random() * 10) + 's';
+      document.body.appendChild(b);
+    }
+
+    // Create confetti
+    const confettiColors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#7bed9f', '#ff6348', '#f368e0'];
+    for (let i = 0; i < 60; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      c.style.left = Math.random() * 100 + '%';
+      c.style.width = (6 + Math.random() * 8) + 'px';
+      c.style.height = (6 + Math.random() * 8) + 'px';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      c.style.animationDuration = (3 + Math.random() * 4) + 's';
+      c.style.animationDelay = (Math.random() * 8) + 's';
+      document.body.appendChild(c);
+    }
+  </script>
+
+</body>
+</html>
